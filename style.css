@@ -1,0 +1,183 @@
+html,body, .body-wrapper{
+    padding: 0;
+    margin: 0;
+    font-family: system-ui;
+}
+
+.banner{
+    background: #333131;
+    padding: 25px;
+}
+
+.content{
+    display: flex;
+    height: auto;
+}
+
+.left{
+    background: #035e6e;
+    padding: 25px;
+    width: 20%;
+}
+
+.right{
+    padding: 25px;
+    background: #fff;
+    width: 80%;
+}
+
+.footer_custom{
+    padding: 25px;
+    background: #333131;
+}
+
+#showStdData table{
+    border: none;
+    width: 100%;
+}
+
+#showStdData table tr{
+    border: none;
+}
+
+#showStdData table tr:nth-child(2n+1){
+    background: #1f7287;
+    color: #fff;
+}
+
+#showStdData table tr:first-child{
+    background: #000;
+}
+
+#showStdData table tr td{
+    text-align: center;
+    padding: 10px;
+    border-bottom: none;
+    border-top: none;
+    border: none;
+}
+
+
+
+
+.search table{
+    border: none;
+    width: 80%;
+}
+
+.search table tr{
+    border: none;
+}
+
+.search table tr:nth-child(2n+1){
+    background: #1f7287;
+    color: #fff;
+}
+
+.search table tr:first-child{
+    background: #000;
+}
+
+.search table tr td{
+    text-align: center;
+    padding: 10px;
+    border-bottom: none;
+    border-top: none;
+    border: none;
+}
+
+.search-wrapper{
+    display: flex;
+    margin: 10px 0px;
+}
+
+#txtsearchName{
+    font-size: 18px;
+    margin: 0px 10px;
+}
+.buttonInsert{
+    
+    cursor: pointer;
+    position: static;
+    background-color: #f00;
+    color: #fff;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+}
+.form-insert-student-error-field-data{
+    display: contents;
+}
+
+
+#paginationStudent{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 18px;
+    width: min-content;
+    /*margin: 15px auto;*/
+    padding: 0px;
+}
+#paginationStudent li{
+    background: #1f7287;
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0px 10px;
+}
+#paginationStudent .active{
+    border: 2px solid #1f7287;
+    background: none;
+    color: #1f7287;
+    font-weight: bolder;
+}
+
+.pagination-control{
+    display: flex;
+    justify-content: center;
+}
+.arrowleft, .arrowright{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 18px;
+    width: min-content;
+    /* margin: 15px auto; */
+    padding: 0px;
+}
+.arrowleft li{
+    background: #1f7287;
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0px 10px;
+}
+.arrowright li{
+    background: #1f7287;
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0px 10px;
+}
