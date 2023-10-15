@@ -38,6 +38,7 @@ html,body, .body-wrapper{
 
 #showStdData table tr{
     border: none;
+    background: #afefff;
 }
 
 #showStdData table tr:nth-child(2n+1){
