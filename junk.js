@@ -411,6 +411,8 @@ function paginationStudent(number){
         if(index==0){
             elemmm.setAttribute("class","active");
         }
+        elemmm.setAttribute("id","button"+(index+1));
+        elemmm.setAttribute("onload","loadbutton("+(index+1)+")");
         elemmm.setAttribute("onclick","toPagenumber("+(index+1)+")");
         var textnode = document.createTextNode(index+1);
         elemmm.appendChild(textnode);
@@ -511,7 +513,7 @@ function ArrowMoving(direction){
     switch (direction) {
 
         case 0:
-            
+            //moveSection(getactivepage);
             //checkCurrentActiveNumber();
             gotoSectionleft(checkCurrentActiveNumber());
             for (let index = 0; index < gettotalpages; index++) {
@@ -529,7 +531,7 @@ function ArrowMoving(direction){
         
         case 1:
             //checkCurrentActiveNumber();
-            
+            //moveSection(getactivepage);
             gotoSection(checkCurrentActiveNumber());
             for (let index = 0; index < gettotalpages; index++) {
                 if(getactivepage == gettotalpages){
@@ -687,7 +689,7 @@ function checkCurrentActiveNumber(){
 }
 
 function gotoSectionleft(x){
-    
+    var xxx = document.getElementById("button"+x);
     var yyy = document.getElementById("paginationStudent");
     var kkk = yyy.children;
     var issamevalue = 0;
@@ -803,7 +805,7 @@ function gotoSectionleft(x){
     
 }
 function gotoSection(x){
-    
+    var xxx = document.getElementById("button"+x);
     var yyy = document.getElementById("paginationStudent");
     var kkk = yyy.children;
     var issamevalue = 0;
@@ -849,40 +851,38 @@ function gotoSection(x){
     //console.log(x);
     if(x>4){
         if(x-right4==0){
-            if(x!=kkk.length){
-                for (let index = left4; index < right4; index++) {
-                    const element = kkk[index];
-                    if(element!=null){
-                        if(element.getAttribute("style")!=null){
-                            //element.removeAttribute("style");
-                        }
-                        else{
-                            element.setAttribute("style","display:none");
-                        }
+            for (let index = left4; index < right4; index++) {
+                const element = kkk[index];
+                if(element!=null){
+                    if(element.getAttribute("style")!=null){
+                        //element.removeAttribute("style");
+                    }
+                    else{
+                        element.setAttribute("style","display:none");
                     }
                 }
-            
-                for (let index = right4; index <= right4+3; index++) {
-                    const element = kkk[index];
-                    if(element!=null){
-                        if(element.getAttribute("style")!=null){
-                            element.removeAttribute("style");
-                        }
-                        else{
-                            //element.setAttribute("style","display:none");
-                        }
-                    }
-                }
+            }
         
-                for (let index = right4+4; index < kkk.length; index++) {
-                    const element = kkk[index];
-                    if(element!=null){
-                        if(element.getAttribute("style")!=null){
-                            //element.removeAttribute("style");
-                        }
-                        else{
-                            element.setAttribute("style","display:none");
-                        }
+            for (let index = right4; index <= right4+3; index++) {
+                const element = kkk[index];
+                if(element!=null){
+                    if(element.getAttribute("style")!=null){
+                        element.removeAttribute("style");
+                    }
+                    else{
+                        //element.setAttribute("style","display:none");
+                    }
+                }
+            }
+    
+            for (let index = right4+4; index < xxx.length; index++) {
+                const element = kkk[index];
+                if(element!=null){
+                    if(element.getAttribute("style")!=null){
+                        //element.removeAttribute("style");
+                    }
+                    else{
+                        element.setAttribute("style","display:none");
                     }
                 }
             }
@@ -948,7 +948,7 @@ function gotoSection(x){
             }
         }
 
-        for (let index = right4+4; index < kkk.length; index++) {
+        for (let index = right4+4; index < xxx.length; index++) {
             const element = kkk[index];
             if(element!=null){
                 if(element.getAttribute("style")!=null){
@@ -1123,53 +1123,420 @@ function SkipRight(x){
     //Reassign value to variable left4,right4 to fetch array
     left4 = left4 - 1;
     right4 = right4;
-    if(kkk.length > right4){
-        if(x!=kkk.length){
-            
-            for (let index = left4; index < right4; index++) {
-                const element = kkk[index];
-                if(element!=null){
-                    var checkactive = element.getAttribute("class");
-                    if(checkactive!=null){
-                        element.removeAttribute("class");
-                    }
-                    if(element.getAttribute("style")!=null){
-                        
-                    }
-                    else{
-                        element.setAttribute("style","display:none");
-                        
-                    }
-                }
-            }
 
-            for (let index = right4; index < right4 + 4; index++) {
-                const element = kkk[index];
-                if(element!=null){
-                    if(index == right4){
-                        element.setAttribute("class","active");
-                        activepage = index;
-                    }
-                    if(element.getAttribute("style")!=null){
-                        element.removeAttribute("style");
-                    }
-                    else{
-                        //element.setAttribute("style","display:none");
-                    }
+    if((kkk.length+1) - right4 != 0){
+
+    
+        for (let index = left4; index < right4; index++) {
+            const element = kkk[index];
+            if(element!=null){
+                var checkactive = element.getAttribute("class");
+                if(checkactive!=null){
+                    element.removeAttribute("class");
+                }
+                if(element.getAttribute("style")!=null){
+                    
+                }
+                else{
+                    element.setAttribute("style","display:none");
+                    
                 }
             }
-            toPagenumber(activepage + 1);
-            for (let index = right4 + 4 ; index < kkk.length; index++) {
-                const element = kkk[index];
-                if(element!=null){
-                    if(element.getAttribute("style")!=null){
-                        //element.removeAttribute("style");
-                    }
-                    else{
-                        element.setAttribute("style","display:none");
-                    }
+        }
+
+        for (let index = right4; index < right4 + 4; index++) {
+            const element = kkk[index];
+            if(element!=null){
+                if(index == right4){
+                    element.setAttribute("class","active");
+                    activepage = index;
+                }
+                if(element.getAttribute("style")!=null){
+                    element.removeAttribute("style");
+                }
+                else{
+                    //element.setAttribute("style","display:none");
+                }
+            }
+        }
+        toPagenumber(activepage + 1);
+        for (let index = right4 + 4 ; index < kkk.length; index++) {
+            const element = kkk[index];
+            if(element!=null){
+                if(element.getAttribute("style")!=null){
+                    //element.removeAttribute("style");
+                }
+                else{
+                    element.setAttribute("style","display:none");
                 }
             }
         }
     }
+}
+
+function gotoSection3(x){
+    var xxx = document.getElementById("button"+x);
+    var yyy = document.getElementById("paginationStudent");
+    var kkk = yyy.children;
+    var issamevalue = 0;
+    var differentvalue = 0;
+    var totalelementinsection = 4;
+    var startelement = 0;
+    var totalnum = getTotalStudentPage();
+    var left4 = 0;
+    var right4 = 0;
+    switch (true) {
+        case x<=4:
+            for (let index = 0; index < x; index++) {
+                const element = kkk[index];
+                if(element.getAttribute("name")==xxx.getAttribute("name")){
+                    //console.log("same section"+(index+1));
+                    if(element.getAttribute("style")!=null){
+                        element.removeAttribute("style");
+                    }
+                }
+                else{
+                    element.setAttribute("style","display:none");
+                }
+        
+            }
+            break;
+        
+        case x>4:
+
+            if(x%2==0){
+                var remainder = x/2;
+                console.log(remainder);
+                if(remainder%2==0){
+                    left4 = x-3;
+                    right4 = x;
+                    //console.log("This number is last element in section");
+                }
+                else{
+                    left4 = x -1;
+                    right4 = x + 2;
+                    //console.log("This number is in position 2 in section");
+                }
+            }
+            else{
+                var newnumb = x + 1;
+                var newnumbremainder = newnumb / 2;
+                if(newnumbremainder%2==0){
+                    //console.log("This number is in position 3 in section");
+                    right4 = x + 1;
+                    left4 = x - 2;
+                }
+                else{
+                    left4 = x;
+                    right4 = x +3;
+                    //console.log("This number is first element in section");
+                }
+            }
+
+            
+            for (let index = 0; index < left4 - 1; index++) {
+                const element = kkk[index];
+                if(element!=null){
+                    if(element.getAttribute("style")!=null){
+                        element.removeAttribute("style");
+                    }
+                    element.setAttribute("style","display:none");
+                }
+                
+            }
+            for (let index = left4 - 1; index < right4; index++) {
+                const element = kkk[index];
+                if(element!=null){
+                    if(element.getAttribute("style")!=null){
+                        element.removeAttribute("style");
+                    }
+                }
+                
+            }
+            
+
+            for (let index = right4; index < totalnum; index++) {
+                const element = kkk[index];
+                if(element!=null){
+                    if(element.getAttribute("style")!=null){
+                        element.removeAttribute("style");
+                    }
+                    element.setAttribute("style","display:none");
+                }
+                
+            }
+
+            break;
+        
+        default:
+            break;
+    }
+    
+    return;
+}
+
+function gotoSection2(x){
+    var xxx = document.getElementById("button"+x);
+    var yyy = document.getElementById("paginationStudent");
+    var kkk = yyy.children;
+    var issamevalue = 0;
+    var differentvalue = 0;
+    var totalelementinsection = 4;
+    var startelement = 0;
+    var totalnum = getTotalStudentPage();
+    var left4 = 0;
+    var right4 = 0;
+    switch (true) {
+        case x<=4:
+            if(x<4){
+                for (let index = 0; index < x; index++) {
+                    const element = kkk[index];
+                    if(element.getAttribute("name")==xxx.getAttribute("name")){
+                        //console.log("same section"+(index+1));
+                        if(element.getAttribute("style")!=null){
+                            element.removeAttribute("style");
+                        }
+                    }
+                    else{
+                        element.setAttribute("style","display:none");
+                    }
+            
+                }
+            }
+            else{
+                for (let index = 4; index < 8; index++) {
+                    const element = kkk[index];
+                    if(element.getAttribute("style")!=null){
+                        element.removeAttribute("style");
+                    }
+                }
+                for (let index = 0; index < x; index++) {
+                    const element = kkk[index];
+                    if(element.getAttribute("style")!=null){
+                        element.removeAttribute("style");
+                    }
+                    element.setAttribute("style","display:none");
+                }
+                for (let index = 8; index < totalnum; index++) {
+                    const element = kkk[index];
+                    if(element.getAttribute("style")!=null){
+                        element.removeAttribute("style");
+                    }
+                    element.setAttribute("style","display:none");
+                }
+            }
+            break;
+        
+
+        case x>4:
+
+            // for (let index = 0; index < x; index++) {
+            //     const element = kkk[index];
+            //     if(element.getAttribute("style")!=null){
+            //         element.removeAttribute("style");
+            //     }
+            //     element.setAttribute("style","display:none");
+            // }
+
+            if(x%2==0){
+                var remainder = x/2;
+                console.log(remainder);
+                if(remainder%2==0){
+                    left4 = x-3;
+                    right4 = x;
+                    //console.log("This number is last element in section");
+                }
+                else{
+                    left4 = x -1;
+                    right4 = x + 2;
+                    //console.log("This number is in position 2 in section");
+                }
+            }
+            else{
+                var newnumb = x + 1;
+                var newnumbremainder = newnumb / 2;
+                if(newnumbremainder%2==0){
+                    //console.log("This number is in position 3 in section");
+                    right4 = x + 1;
+                    left4 = x - 2;
+                }
+                else{
+                    left4 = x;
+                    right4 = x +3;
+                    //console.log("This number is first element in section");
+                }
+            }
+
+            for (let index = left4; index <= right4; index++) {
+                const element = kkk[index];
+                if(element.getAttribute("style")!=null){
+                    element.removeAttribute("style");
+                }
+            }
+            for (let index = 0; index < left4; index++) {
+                const element = kkk[index];
+                if(element.getAttribute("style")!=null){
+                    element.removeAttribute("style");
+                }
+                element.setAttribute("style","display:none");
+            }
+
+            
+
+            for (let index = right4 + 1; index <= totalnum; index++) {
+                const element = kkk[index];
+                if(element.getAttribute("style")!=null){
+                    element.removeAttribute("style");
+                }
+                element.setAttribute("style","display:none");
+            }
+            break;
+        
+        default:
+            break;
+    }
+    // for (let index = 0; index < kkk.length; index++) {
+    //     const element = kkk[index];
+    //     if(element.getAttribute("name")==xxx.getAttribute("name")){
+    //         //console.log("same section"+(index+1));
+    //         if(element.getAttribute("style")!=null){
+    //             element.removeAttribute("style");
+    //         }
+    //     }
+    //     else{
+    //         element.setAttribute("style","display:none");
+    //     }
+
+    // }
+
+
+    // for (let index = 0; index < kkk.length; index++){
+    //     const element = kkk[index];
+    //     if(element.getAttribute("name")==xxx.getAttribute("name")){
+    //         issamevalue = issamevalue + 1;
+    //     }
+    //     else{
+    //         differentvalue = differentvalue + 1;
+    //     }
+    // }
+    //console.log(issamevalue+"&"+differentvalue);
+    //checkNextNumber(x);
+}
+
+
+function loadbutton(x){
+    console.log(x+"is triggered");
+}
+
+
+function checkNextNumber(x){
+    var xxx = document.getElementById("button"+x);
+    var yyy = document.getElementById("paginationStudent");
+    var kkk = yyy.children;
+    for (let index = 0; index < kkk.length; index++) {
+        if(x-1==index){
+            const element = kkk[x];
+            if(element!=null){
+                if(element.getAttribute("name")==xxx.getAttribute("name")){
+                    console.log("next number"+(x+1)+"is same section");
+                }
+                else{
+                    console.log("next number"+(x+1)+"is different section");
+                }
+                break;
+            }
+        }
+    }
+}
+
+function moveSection(x){
+    var xxx = document.getElementById("paginationStudent");
+    var vvv = xxx.children;
+    var isinsection = 0;
+    var checkthenextpage = 0;
+    for (let index = 0; index < vvv.length; index++) {
+        if(x==index+1){
+            const element = vvv[index];
+            var sectionposition = removeFirstCharactersofString(element.getAttribute("section"),6);
+            if(removeFirstCharactersofString(element.getAttribute("section"),6) == sectionposition){
+                isinsection = sectionposition;
+                
+                    const element2 = vvv[index+1];
+                    if(element2!=null){
+                        if(removeFirstCharactersofString(element2.getAttribute("section"),6) != sectionposition){
+                            checkthenextpage = x + 1;
+                        }
+                        else{
+                            checkthenextpage = 0;
+                        }
+                    }
+                break;
+            }
+        }
+    }
+    console.log(checkthenextpage);
+
+
+    
+    
+    
+        for (let index = 0; index < vvv.length; index++) {
+            const element = vvv[index];
+            var mmm = element.getAttribute("section");
+            if(mmm == "section"+isinsection){
+
+                if(checkthenextpage!=0){
+                    if(checkthenextpage - index == 1){
+                        const element = vvv[index];
+                        //element.setAttribute("style","display:none");
+                        if(element.getAttribute("style")!=null){
+                            element.removeAttribute("style");
+                        }
+                    }
+                    else{
+                        const element = vvv[index];
+                        var mmm = element.getAttribute("section");
+                        if(mmm == "section"+isinsection){
+                            if(element.getAttribute("style")!=null){
+                                element.removeAttribute("style");
+                            }
+                        }
+                        else{
+                            element.setAttribute("style","display:none");
+                        }
+                    }
+                }
+                else{
+                    element.removeAttribute("style");
+                }
+            }
+            else{
+                element.setAttribute("style","display:none");
+            }
+        }
+       
+    // for (let index = 0; index < vvv.length; index++) {
+    //     const element = vvv[index];
+    //     var mmm = element.getAttribute("section");
+    //     if(mmm == "section"+isinsection){
+    //         if(checkthenextpage!=0){
+    //             for (let index = 0; index < xxx.length; index++) {
+    //                 const element = xxx[index];
+    //                 if(element!=null){
+    //                     element.setAttribute("style","display:none");
+    //                 }
+                    
+    //             }
+    //             checkthenextpage = 0;
+    //         }
+    //         // if(element.getAttribute("style")!=null){
+    //         //     element.removeAttribute("style");
+    //         // }
+    //     }
+    //     else{
+    //         element.setAttribute("style","display:none");
+            
+    //     }
+    // }
+
 }

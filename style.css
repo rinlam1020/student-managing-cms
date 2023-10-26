@@ -114,10 +114,10 @@ html,body, .body-wrapper{
 #paginationStudent{
     list-style-type: none;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     font-size: 18px;
-    width: min-content;
-    /*margin: 15px auto;*/
+    width: 300px;
+    /* margin: 15px auto; */
     padding: 0px;
 }
 #paginationStudent li{
