@@ -18,18 +18,21 @@
 		echo "Database does not exist\n".$connectmotherdatabase;
 	}
 	*/
-	
 
 	$con = mysqli_connect($host_name, $user_name, $password, $database);
 	$res = mysqli_query($con, "SELECT * FROM `STUDENT` ");
     $sqlgetColumnname = "SHOW COLUMNS FROM STUDENT";
     $resultColumnName = mysqli_query($con,$sqlgetColumnname);
     $strShowColumnName = "<tr>";
+	
+	//Show original Column name
     while($rowColumnName = mysqli_fetch_array($resultColumnName)){
         $strShowColumnName .= "<td>".$rowColumnName['Field']."</td>";
     }
-    $strShowColumnName .= "</tr>";
-    
+
+    //Show custom Column name
+	//$strShowColumnName .= "<td>Student ID</td><td>Student Name</td><td>Student Address</td><td>Student Age</td><td>Date Created</td>";
+	$strShowColumnName .= "</tr>";
 	if($res)
 	{
         $numbcounter = 0;
