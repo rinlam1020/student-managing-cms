@@ -61,25 +61,29 @@ html,body, .body-wrapper{
 
 
 
-.search table{
+#search{
     border: none;
     width: 80%;
 }
 
-.search table tr{
+#search tr{
     border: none;
 }
 
-.search table tr:nth-child(2n+1){
+#search tr:nth-child(2n+1){
     background: #1f7287;
     color: #fff;
 }
 
-.search table tr:first-child{
+#search tr:nth-child(2n+2) {
+    background: #afefff;
+}
+
+#search tr:first-child{
     background: #000;
 }
 
-.search table tr td{
+#search tr td{
     text-align: center;
     padding: 10px;
     border-bottom: none;

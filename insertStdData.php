@@ -15,8 +15,10 @@
     $stdname = $name;
     $stdaddr = $address;
     $stdage = $age;
-    $sqlinsertStudent = "INSERT INTO STUDENT (StudentID, StudentName, StudentAddress, StudentAge)
-    VALUES ('".$stdid."', '".$stdname."', '".$stdaddr."', '".$stdage."')";
+    date_default_timezone_set("Asia/Ho_Chi_Minh");
+    $dateadded = date("Y-m-d h:i:sa");
+    $sqlinsertStudent = "INSERT INTO STUDENT (StudentID, StudentName, StudentAddress, StudentAge, DateAdded)
+    VALUES ('".$stdid."', '".$stdname."', '".$stdaddr."', '".$stdage."', '".$dateadded."')";
 
     if($stdid){
         if (mysqli_query($con, $sqlinsertStudent) === TRUE) 

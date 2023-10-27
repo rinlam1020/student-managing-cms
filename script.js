@@ -1,7 +1,4 @@
 var nameflag = false, ageflag = false, addressflag = false;
-function testfunc(){
-    console.log("xxxx");
-}
 
 function showStdData(){
     
@@ -12,8 +9,6 @@ function showStdData(){
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) 
         {
-            //const tableStudent = document.getElementById("tableStudent");
-            //tableStudent.remove();
             document.getElementById("showStdData").innerHTML = this.responseText;
             var yyy = document.getElementById("showStdData");
             yyy.removeAttribute("style");
@@ -22,7 +17,6 @@ function showStdData(){
             loadStudentID();
             paginationStudent(2);
             displayNumberinPagination(4);
-            //console.log(removeFirstCharactersofString("StudentPage11",10));
         }
     };
     
@@ -31,12 +25,6 @@ function showStdData(){
     xmlhttp.open("GET", "showStdData.php?q=" , true);
     xmlhttp.send();
     
-}
-
-function resetFieldInsert(){
-    document.getElementById("txtstdname").value = "";
-    document.getElementById("txtstdage").value = "";
-    document.getElementById("txtstdaddr").value = "";
 }
 
 function insertStdData() {
@@ -48,11 +36,22 @@ function insertStdData() {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) 
         {
-            //const tableStudent = document.getElementById("tableStudent");
-            //tableStudent.remove();
-            document.getElementById("showError").innerHTML = this.responseText;
+            var showError = document.getElementById("showError");
+            if(showError.getAttribute("style")!=null){
+                showError.removeAttribute("style");
+            }
+            var messageresponse = this.responseText;
+            messageresponse = getFirstCharactersofString(messageresponse,5);
+            showError.innerHTML = this.responseText;
             resetFieldInsert();
             showStdData();
+            if(messageresponse == "Error"){
+
+            }
+            else{
+                setInterval(function() {showError.setAttribute("style","display:none")}, 3000);
+            }
+            
         }
     };
     
@@ -75,50 +74,6 @@ function insertStdData() {
     
 }
 
-function getLastCharactersofString(str, numbercharacterscheck) {
-    var strtest = "";
-    for (let i = 0; i < str.length; i++) {
-        if(i>=str.length - numbercharacterscheck){
-            strtest += str.charAt(i);       
-        }
-    }
-    return strtest;
-}
-
-function getFirstCharactersofString(str, numbercharacterscheck) {
-    var strtest = "";
-    for (let i = 0; i < str.length; i++) {
-        if(i<numbercharacterscheck){
-            strtest += str.charAt(i);       
-        }
-    }
-    return strtest;
-}
-
-function removeFirstCharactersofString(str, numberofremove){
-    var strtest = "";
-    for (let index = 0; index < str.length; index++) {
-        if(index<=numberofremove){
-            strtest += str.charAt(index);
-        }
-    }
-    return str.replace(strtest,"");
-}
-
-function isNumber(str){
-    var strtest = "";
-    for (let i = 0; i < str.length; i++) {
-        strtest = str.charAt(i);
-        if (strtest >= '0' && strtest <= '9'){
-            continue;
-        }
-        else{
-            return false;
-        }       
-    }
-    return true;
-}
-
 function searchStdname(str) 
 {
     if (str.length == 0) 
@@ -137,11 +92,10 @@ function searchStdname(str)
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) 
             {
-                //const tableStudent = document.getElementById("tableStudent");
-                //tableStudent.remove();
                 document.getElementById("showStdData").style.display = 'none';
                 document.getElementById("searchName").innerHTML = this.responseText;
-                loopElementbyId("search");
+                //Styling the Search table when it has shown after successfully found, loop element order : <table> => <tbody> => <tr> => <td>
+                //stylingTableSearch("search");
             }
         };
         
@@ -151,17 +105,6 @@ function searchStdname(str)
         xmlhttp.send();
     }
 }
-
-function loadStudentID()
-{
-    var numbcounter = document.getElementById("numbcounter").innerText;
-    var autoGenerateStudentId = document.getElementById("txtstdid");
-    autoGenerateStudentId.disabled = true;
-    autoGenerateStudentId.value = "S" + numbcounter;
-}
-
-
-
 
 function checkdata(str,fieldIdentify){
         switch (fieldIdentify) {
@@ -196,12 +139,12 @@ function checkdata(str,fieldIdentify){
             case "1":
                 
                 switch (true) {
-                    case containsLetters(str) && containsSpecialCharacters(str) && isNumber(getFirstCharactersofString(str,3)):
+                    case containsLetters(str) && containsSpecialCharactersCheckforNumbers(str) && isNumber(getFirstCharactersofString(str,3)):
                         displayError("Student Age has only 2 digits and not allows letters and special characters","dataStudentAge");
                         ageflag = true;
                         return;
 
-                    case containsLetters(str) && containsSpecialCharacters(str) && isNumber(getLastCharactersofString(str,3)):
+                    case containsLetters(str) && containsSpecialCharactersCheckforNumbers(str) && isNumber(getLastCharactersofString(str,3)):
                         displayError("Student Age has only 2 digits and not allows letters and special characters","dataStudentAge");
                         ageflag = true;
                         return;
@@ -217,17 +160,17 @@ function checkdata(str,fieldIdentify){
                         return;
 
 
-                    case containsSpecialCharacters(str) && isNumber(getLastCharactersofString(str,3)):
+                    case containsSpecialCharactersCheckforNumbers(str) && isNumber(getLastCharactersofString(str,3)):
                         displayError("Student Age has only 2 digits and not allows special characters","dataStudentAge");
                         ageflag = true;
                         return;
                     
-                    case containsSpecialCharacters(str) && isNumber(getFirstCharactersofString(str,3)):
+                    case containsSpecialCharactersCheckforNumbers(str) && isNumber(getFirstCharactersofString(str,3)):
                         displayError("Student Age has only 2 digits and not allows special characters","dataStudentAge");
                         ageflag = true;
                         return;
 
-                    case containsLetters(str) && containsSpecialCharacters(str):
+                    case containsLetters(str) && containsSpecialCharactersCheckforNumbers(str):
                         displayError("Student Age not allows letters and special characters","dataStudentAge");
                         ageflag = true;
                         return;
@@ -237,7 +180,7 @@ function checkdata(str,fieldIdentify){
                         ageflag = true;
                         return;
 
-                    case containsSpecialCharacters(str):
+                    case containsSpecialCharactersCheckforNumbers(str):
                         displayError("Student Age not allows special characters","dataStudentAge");
                         ageflag = true;
                         return;
@@ -281,63 +224,6 @@ function checkdata(str,fieldIdentify){
         }
 }
 
-
-function containsNumbers(str) {
-    return /\d/.test(str);
-}
-
-function containsLetters(str){
-    return /[a-zA-Z]/g.test(str);
-}
-
-function containsSpecialCharacters(str){
-    return /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(str);
-}
-
-function displayError(message, indicator){
-    var xxx = document.getElementsByClassName(indicator);
-    //var childs = xxx.childs();
-    for (let index = 0; index < xxx.length; index++) {
-        const element = xxx[index];
-        var childss = element.children;
-        for (let index = 0; index < childss.length; index++) {
-            if(index==childss.length - 1){
-                const elementx = childss[index];
-                elementx.innerText = message;
-            }
-        }
-    }
-}
-
-function loopElementbyId(indicator){
-    var xxx = document.getElementById(indicator);
-    var vvv = xxx.children;
-    for (let index = 0; index < vvv.length; index++) {
-        const elementx = vvv[index];
-        elementx.parentElement.setAttribute("style","font-size:16px;width:80%");
-        var jjj = elementx.children;
-        for (let index = 0; index < jjj.length; index++) {
-            const elementy = jjj[index];
-            if(index%2==0){
-                if(index==0){
-                    elementy.setAttribute("style","background:#000;color: #fff;");
-                }
-                else{
-                    elementy.setAttribute("style","background:#1f7287;color: #fff;");
-                }
-            }
-
-            var ccc = elementy.children;
-            for (let index = 0; index < ccc.length; index++) {
-                const elementp = ccc[index];
-                elementp.setAttribute("style","text-align: center;padding: 10px;border-bottom: none;border-top: none;border: none;");
-                
-            }
-        }
-    }
-    
-}
-
 function paginationStudent(number){
     var xxx = document.getElementById("showStdData");
     var vvv = xxx.children;
@@ -368,8 +254,7 @@ function paginationStudent(number){
                     elementp.setAttribute("class","StudentPage"+lapcount);
                 }
                 totalelemt +=1;
-                
-                //console.log(totalelemt);
+                //Total elements in one page at order numb *
                 //console.log(totalelemt+"elements in order"+lapcount);
                 numbbutton = lapcount;
             }
@@ -446,23 +331,6 @@ function paginationStudent(number){
     activatePagination(numbbutton);
 }
 
-function getActivePageNumber(){
-    var lll = document.getElementById("paginationStudent");
-    var ooo = lll.children;
-    for (let index = 0; index < ooo.length; index++) {
-        const element = ooo[index];
-        var getActiveClass = element.getAttribute("class");
-        if(getActiveClass == null){
-            //console.log("Page"+index+" unactive");
-            
-        }
-        else{
-            //console.log("Page"+index+" active");
-            return index + 1;
-        }
-    }  
-}
-
 function getTotalStudentPage(){
     var lll = document.getElementById("paginationStudent");
     var ooo = lll.children;
@@ -473,47 +341,14 @@ function getTotalStudentPage(){
     return totalxxx;
 }
 
-
-function getActiveSection(){
-    var lll = document.getElementById("paginationStudent");
-    var ooo = lll.children;
-    for (let index = 0; index < ooo.length; index++) {
-        const element = ooo[index];
-        var getActiveClass = element.getAttribute("sectionactive");
-        if(getActiveClass == null){
-            //console.log("section"+index+getActiveClass);
-            
-        }
-        else{
-            //console.log("section"+index+getActiveClass);
-            return index + 1;
-        }
-    } 
-}
-
-function getTotalSection(){
-    var lll = document.getElementById("paginationStudent");
-    var ooo = lll.children;
-    var totalxxx = 0;
-    for (let index = 0; index < ooo.length; index++) {
-        totalxxx = index;
-    }
-    return totalxxx;
-}
-
-
 function ArrowMoving(direction){
     var getactivepage = getActivePageNumber();
     var gettotalpages = getTotalStudentPage() + 1;
 
-    var getactivesection = getActiveSection();
-    var gettotalsection = getTotalSection() + 1;
     switch (direction) {
 
         case 0:
-            
-            //checkCurrentActiveNumber();
-            gotoSectionleft(checkCurrentActiveNumber());
+            gotoSectionleft(getactivepage);
             for (let index = 0; index < gettotalpages; index++) {
                 if(getactivepage == 1){
                     console.log("This is the first page");
@@ -528,9 +363,7 @@ function ArrowMoving(direction){
             
         
         case 1:
-            //checkCurrentActiveNumber();
-            
-            gotoSection(checkCurrentActiveNumber());
+            gotoSection(getactivepage);
             for (let index = 0; index < gettotalpages; index++) {
                 if(getactivepage == gettotalpages){
                     console.log("This is the last page");
@@ -548,14 +381,13 @@ function ArrowMoving(direction){
     }
 }
 
-
 function ArrowSkipping(direction){
     var getactivepage = getActivePageNumber();
     var gettotalpages = getTotalStudentPage() + 1;
     switch (direction) {
 
         case 0:
-            SkipLeft(checkCurrentActiveNumber());
+            SkipLeft(getactivepage);
             // if(getactivepage==1){
             //     console.log("<<This is the first page");
             //     return;
@@ -564,7 +396,7 @@ function ArrowSkipping(direction){
             return;
         
         case 1:
-            SkipRight(checkCurrentActiveNumber());
+            SkipRight(getactivepage);
             // if(getactivepage==gettotalpages){
             //     console.log(">>This is the last page");
             //     return;
@@ -596,7 +428,6 @@ function activatePagination(number){
     }
 }
 
-
 function toPagenumber(number){
     var xxx = document.getElementsByClassName("StudentPage"+number);
     var yyy;
@@ -604,7 +435,6 @@ function toPagenumber(number){
     for (let index = 0; index < xxx.length; index++) {
         const element = xxx[index];
         yyy = element.parentNode;
-        //console.log(yyy);
         break;
         //element.setAttribute("style","display:block");
     }
@@ -668,33 +498,29 @@ function displayNumberinPagination(number){
             element.setAttribute("style","display:none");
         }
     }
-
-
-    //getActiveSection();
 }
 
-function checkCurrentActiveNumber(){
-    var xxx = document.getElementById("paginationStudent");
-    var vvv = xxx.children;
-    for (let index = 0; index < vvv.length; index++) {
-        const element = vvv[index];
-        var isactive = element.getAttribute("class");
-        if(isactive!=null){
-            //console.log((index+1)+"is active");
-            return index+1;
+function getActivePageNumber(){
+    var lll = document.getElementById("paginationStudent");
+    var ooo = lll.children;
+    for (let index = 0; index < ooo.length; index++) {
+        const element = ooo[index];
+        var getActiveClass = element.getAttribute("class");
+        if(getActiveClass == null){
+            //console.log("Page"+index+" unactive");
+            
         }
-    }
+        else{
+            //console.log("Page"+index+" active");
+            return index + 1;
+        }
+    }  
 }
 
 function gotoSectionleft(x){
     
     var yyy = document.getElementById("paginationStudent");
     var kkk = yyy.children;
-    var issamevalue = 0;
-    var differentvalue = 0;
-    var totalelementinsection = 4;
-    var startelement = 0;
-    var totalnum = getTotalStudentPage();
     var left4 = 0;
     var right4 = 0;
 
@@ -802,15 +628,11 @@ function gotoSectionleft(x){
     }
     
 }
+
 function gotoSection(x){
     
     var yyy = document.getElementById("paginationStudent");
     var kkk = yyy.children;
-    var issamevalue = 0;
-    var differentvalue = 0;
-    var totalelementinsection = 4;
-    var startelement = 0;
-    var totalnum = getTotalStudentPage();
     var left4 = 0;
     var right4 = 0;
 
@@ -846,7 +668,6 @@ function gotoSection(x){
     //Reassign value to variable left4,right4 to fetch array
     left4 = left4 - 1;
     right4 = right4;
-    //console.log(x);
     if(x>4){
         if(x-right4==0){
             if(x!=kkk.length){

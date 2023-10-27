@@ -68,8 +68,8 @@
 
 
 
-    
-
+    <script src="styling.js"></script>
+    <script src="misc.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
