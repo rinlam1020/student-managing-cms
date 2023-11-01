@@ -31,7 +31,7 @@
     }
 
     //Show custom Column name
-	//$strShowColumnName .= "<td>Student ID</td><td>Student Name</td><td>Student Address</td><td>Student Age</td><td>Date Created</td>";
+	//$strShowColumnName .= "<td>mã học sinh</td><td>tên học sinh</td><td>địa chỉ</td><td>độ tuôỉ </td><td>ngày tạo</td>";
 	$strShowColumnName .= "</tr>";
 	if($res)
 	{
@@ -53,6 +53,6 @@
 		}
         echo $strResopenTable.$strShowColumnName.$strRes."</table><p style='display:none;' id='numbcounter'>".$numbcounter."</p>";
 	}
-    
+
 	mysqli_close($con);
 ?>

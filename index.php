@@ -58,6 +58,7 @@
                     </table>
 
                     <div class="buttonInsert" onclick = "insertStdData()">insert</div>
+                    <div class="buttonInsert" onclick = "testApiData()">Test api</div>
                     <div id = "showError"></div>
 
                 </div>
@@ -70,6 +71,7 @@
 
     <script src="styling.js"></script>
     <script src="misc.js"></script>
+    <script src="misc2.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

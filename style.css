@@ -48,6 +48,9 @@ html,body, .body-wrapper{
 
 #showStdData table tr:first-child{
     background: #000;
+    text-transform: capitalize;
+    font-family: auto;
+    font-size: large;
 }
 
 #showStdData table tr td{
