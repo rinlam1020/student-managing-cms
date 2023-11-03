@@ -23,10 +23,10 @@
     if($stdid){
         if (mysqli_query($con, $sqlinsertStudent) === TRUE) 
         {
-            echo "New record created successfully";
+            echo "Insert-New record created successfully";
         }
         else{
-            echo "Error: " . $sqlinsertStudent . "<br>" . mysqli_error($con);
+            echo "Insert-Error: " . $sqlinsertStudent . "<br>" . mysqli_error($con);
         }
     }
     else{

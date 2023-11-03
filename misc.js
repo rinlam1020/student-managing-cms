@@ -26,6 +26,44 @@ function getFirstCharactersofString(str, numbercharacterscheck) {
     return strtest;
 }
 
+function getStringendwithCharacter(str, characters) { // Get string until meets character parameter
+    var strtest = "";
+    if(str == null){
+        return "";
+    }
+    for (let i = 0; i < str.length; i++) {
+        if(str.charAt(i)!=characters){
+            strtest += str.charAt(i);       
+        }
+        else{
+            break;
+        }
+    }
+    return strtest;
+}
+
+function getStringskipfromCharacter(str, characters) { // Get string after meets character parameter
+    if(str == null){
+        return "";
+    }
+    var strtest = "";
+    var getthischar = false;
+    for (let i = 0; i < str.length; i++) {
+        if(str.charAt(i)==characters){
+            getthischar = true;       
+        }
+        else{
+            if(getthischar==true){
+                strtest += str.charAt(i);
+            }
+            else{
+
+            }
+        }
+    }
+    return strtest;
+}
+
 function removeFirstCharactersofString(str, numberofremove){
     var strtest = "";
     for (let index = 0; index < str.length; index++) {

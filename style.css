@@ -121,9 +121,10 @@ html,body, .body-wrapper{
 #paginationStudent{
     list-style-type: none;
     display: flex;
+    flex-flow: wrap;
     justify-content: center;
     font-size: 18px;
-    width: 300px;
+    width: auto;
     /* margin: 15px auto; */
     padding: 0px;
 }
@@ -140,6 +141,7 @@ html,body, .body-wrapper{
     font-weight: 700;
     font-size: 20px;
     margin: 0px 10px;
+    margin-bottom: 5px;
 }
 #paginationStudent .active{
     border: 2px solid #1f7287;

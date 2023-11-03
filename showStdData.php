@@ -36,7 +36,7 @@
 	if($res)
 	{
         $numbcounter = 0;
-        $strResopenTable = "<table id='tableStudent'>";
+        $strResopenTable = "<table class='tablecontent' id='tableStudent'>";
 		while($rows = mysqli_fetch_row($res))
 		{
 			foreach($rows as $key => $row)

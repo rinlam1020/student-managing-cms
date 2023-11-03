@@ -20,7 +20,7 @@
 	if($res)
 	{
         $numbcounter = 0;
-        $strResopenTable = "<table id='search'>";
+        $strResopenTable = "<table class='tablecontent' id='search'>";
 		while($rows = mysqli_fetch_row($res))
 		{
 			foreach($rows as $key => $row)
